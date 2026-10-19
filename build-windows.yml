@@ -1,0 +1,52 @@
+name: Build Windows EXE (Nativefier)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/build-windows.yml"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Pin a specific Nativefier version so builds stay reproducible.
+      # Explicit --platform/--arch avoid relying on auto-detection.
+      # --disable-dev-tools and --single-instance make it behave like a real desktop app.
+      - name: Build EXE using Nativefier
+        shell: bash
+        run: |
+          npx --yes nativefier@52.0.0 \
+            --name "HemamApp" \
+            --platform windows \
+            --arch x64 \
+            --single-instance \
+            --disable-dev-tools \
+            "https://hemam-edu.blogspot.com" \
+            ./output
+
+      # Nativefier nests output inside ./output/<AppName>-win32-x64/
+      # Zip it so the artifact is one clean downloadable file.
+      - name: Zip the build output
+        shell: pwsh
+        run: |
+          $folder = Get-ChildItem -Path ./output -Directory | Select-Object -First 1
+          Compress-Archive -Path "$($folder.FullName)\*" -DestinationPath "./HemamApp-Windows.zip"
+
+      - name: Upload EXE Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HemamApp-Windows
+          path: ./HemamApp-Windows.zip
+          retention-days: 30

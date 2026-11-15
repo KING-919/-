@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ember_bg">#0E0D0B</color>
+    <color name="ember_panel">#191713</color>
+    <color name="ember_border">#2A2620</color>
+    <color name="ember_text">#F4EFE6</color>
+    <color name="ember_muted">#988F80</color>
+    <color name="ember_accent">#E08360</color>
+    <color name="ember_green">#83CBA6</color>
+    <color name="ember_red">#E89182</color>
+</resources>

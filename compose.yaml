@@ -1,0 +1,20 @@
+services:
+  nova:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${NOVA_PORT:-3456}:3456"
+    environment:
+      PORT: "3456"
+      HOST: "0.0.0.0"
+      NOVA_DATA_DIR: /data
+      AGENT_WORKSPACE: /workspace
+      LMSTUDIO_BASE_URL: ${LMSTUDIO_BASE_URL:-http://host.docker.internal:1234}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - nova_data:/data
+      - ./workspace:/workspace
+
+volumes:
+  nova_data:

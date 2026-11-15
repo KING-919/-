@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NOVA Agent</string>
+    <string name="accessibility_service_label">NOVA Phone Control</string>
+    <string name="accessibility_service_desc">يسمح لوكيل NOVA بقراءة عناصر الشاشة وتنفيذ اللمس والتمرير والكتابة وفتح التطبيقات بموافقتك.</string>
+    <string name="bridge_channel_name">NOVA Mobile Bridge</string>
+    <string name="bridge_notif_title">وكيل الجوال NOVA نشط</string>
+    <string name="bridge_notif_text">جسر التحكم بالهاتف يعمل على المنفذ 8765</string>
+    <string name="enable_accessibility">تفعيل التحكم</string>
+    <string name="accessibility_on">التحكم مفعّل</string>
+    <string name="connect_server">اتصال</string>
+    <string name="server_url_hint">http://192.168.1.x:3000</string>
+</resources>

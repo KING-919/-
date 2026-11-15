@@ -1,0 +1,76 @@
+{
+  "name": "nova-agent-desktop",
+  "version": "2.2.0",
+  "private": true,
+  "author": "NOVA Agent Contributors",
+  "description": "NOVA Agent — Bilingual local-first desktop & mobile control agent",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "prestart": "node scripts/ensure-deps.js",
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test lib/*.test.js",
+    "build": "node --check server.js && node --check lib/agent.js && node --check lib/config.js && node --check lib/lmstudio.js && node --check lib/mobile-tools.js && node --check lib/sessions.js && node --check lib/text-tools.js && node --check lib/tools.js",
+    "lint": "node --check server.js && node --check lib/agent.js && node --check lib/config.js && node --check lib/lmstudio.js && node --check lib/mobile-tools.js && node --check lib/sessions.js && node --check lib/text-tools.js && node --check lib/tools.js && node --check public/app.js && node --check public/js/i18n.js && node --check public/js/base.js && node --check public/js/chat.js && node --check public/js/settings.js && node --check public/js/state.js && node --check public/js/tools-ui.js && node --check public/js/workspace-ui.js",
+    "desktop": "electron .",
+    "dist:win": "electron-builder --win nsis portable --publish never",
+    "dist:dir": "electron-builder --dir"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.nova.agent",
+    "productName": "NOVA Agent",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "desktop/**/*",
+      "server.js",
+      "lib/**/*",
+      "!lib/*.test.js",
+      "public/**/*",
+      "package.json",
+      "!**/data/**",
+      "!**/workspace/**",
+      "!**/android/**",
+      "!**/dist/**"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "public/assets/nova.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "portable": {
+      "artifactName": "NOVA-Portable-win-${arch}.${ext}"
+    },
+    "nsis": {
+      "artifactName": "NOVA-Setup-win-${arch}.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

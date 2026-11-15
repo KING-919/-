@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA Mobile Agent</title>
+  <style>
+    :root {
+      --bg: #0e0d0b;
+      --panel: #191713;
+      --border: #2a2620;
+      --text: #f4efe6;
+      --muted: #988f80;
+      --accent: #e08360;
+      --green: #83cba6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 20px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: sans-serif;
+      line-height: 1.7;
+    }
+    .card {
+      max-width: 560px;
+      margin: 12px auto;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    h1 { margin: 0 0 8px; font-size: 20px; color: var(--accent); }
+    p { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+    .code {
+      direction: ltr;
+      text-align: left;
+      padding: 10px 12px;
+      background: #100f0d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--green);
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #21110a;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>وكيل الجوال NOVA جاهز للربط</h1>
+    <p>يعمل هذا التطبيق كجسر تحكم حقيقي بالجوال (عبر Accessibility Service) على المنفذ 8765، وكذلك كواجهة للاتصال بخادم NOVA.</p>
+    <div class="code" id="bridge-info">Bridge: http://127.0.0.1:8765</div>
+    <p><strong>1.</strong> اضغط زر <b>تفعيل التحكم</b> في الأعلى وامنح إذن Accessibility لـ NOVA Phone Control.</p>
+    <p><strong>2.</strong> من إعدادات NOVA على اللابتوب (تبويب <b>وكيل الجوال</b>) أدخل عنوان IP الجوال الظاهر في الشريط العلوي، أو شغّل NOVA محليًا في Termux على <code>http://127.0.0.1:3000</code>.</p>
+    <button class="btn" onclick="location.reload()">إعادة محاولة الاتصال</button>
+  </div>
+  <script>
+    if (window.NovaBridgeInfo && window.NovaBridgeInfo.getStatusText) {
+      document.getElementById('bridge-info').textContent = window.NovaBridgeInfo.getStatusText();
+    }
+  </script>
+</body>
+</html>

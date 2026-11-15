@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">NOVA Agent</title>
+  <desc id="desc">A local-first AI coding workspace for the models and APIs you choose.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#171512"/>
+      <stop offset="1" stop-color="#29221d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="82%" cy="25%" r="70%">
+      <stop offset="0" stop-color="#c97858" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#c97858" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="360" rx="28" fill="url(#bg)"/>
+  <rect width="1200" height="360" rx="28" fill="url(#glow)"/>
+  <circle cx="166" cy="180" r="88" fill="#201d19" stroke="#4c3b31" stroke-width="2"/>
+  <g transform="translate(166 180)" stroke="#db8b69" stroke-width="8" stroke-linecap="round">
+    <path d="M0-51V-18M0 18V51M-51 0h33M18 0h33M-36-36l23 23M13 13l23 23M36-36L13-13M-13 13l-23 23"/>
+  </g>
+  <circle cx="166" cy="180" r="9" fill="#f0b18f"/>
+  <text x="300" y="153" fill="#f4eee6" font-family="Segoe UI,Arial,sans-serif" font-size="62" font-weight="700" letter-spacing="7">NOVA AGENT</text>
+  <text x="304" y="204" fill="#d9a084" font-family="Segoe UI,Arial,sans-serif" font-size="23" font-weight="600" letter-spacing="1.8">YOUR MODELS. YOUR WORKSPACE. YOUR APPROVALS.</text>
+  <text x="304" y="253" fill="#c9c1b8" font-family="Segoe UI,Arial,sans-serif" font-size="21">A local-first coding assistant for Windows and the web.</text>
+  <text x="304" y="292" fill="#9d9186" font-family="Segoe UI,Arial,sans-serif" font-size="17">OpenAI-compatible APIs · Local models · Workspace tools</text>
+  <path d="M1080 63v234" stroke="#725342" stroke-opacity=".65"/>
+  <circle cx="1080" cy="64" r="5" fill="#d98c69"/>
+  <circle cx="1080" cy="180" r="5" fill="#d98c69"/>
+  <circle cx="1080" cy="296" r="5" fill="#d98c69"/>
+</svg>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.NovaMobile" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/ember_bg</item>
+        <item name="android:statusBarColor">@color/ember_bg</item>
+        <item name="android:navigationBarColor">@color/ember_bg</item>
+        <item name="colorPrimary">@color/ember_accent</item>
+        <item name="colorSurface">@color/ember_panel</item>
+    </style>
+</resources>

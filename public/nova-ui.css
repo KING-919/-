@@ -1936,6 +1936,114 @@ input[type="number"] {
   line-height: 1.75;
 }
 
+.builds-box {
+  margin-top: 12px;
+  padding: 11px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+}
+
+.builds-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.builds-head small {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--faint);
+}
+
+.builds-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.builds-empty {
+  color: var(--muted);
+  font-size: 10.5px;
+}
+
+.build-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel-2);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s ease-out, background 0.15s ease-out;
+}
+
+.build-item:hover {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  background: var(--panel-3);
+}
+
+.build-ico {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.build-ico svg {
+  width: 14px;
+  height: 14px;
+}
+
+.build-meta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.build-meta b {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.build-meta small {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.build-dl {
+  padding: 4px 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 36%, transparent);
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+[data-theme="light"] .build-dl {
+  color: var(--accent);
+}
+
 .modal-foot {
   gap: 12px;
   padding: 12px 20px;

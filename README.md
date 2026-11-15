@@ -131,14 +131,21 @@ flowchart LR
 
 The Electron main process starts the local server and hosts the same interface available in a browser. The server streams agent events to the UI. The agent uses provider adapters and workspace tools; file writes and shell commands can require user approval. Settings and sessions stay in the app's local data directory.
 
-## Build a Windows installer
+## Build Windows EXE & Android APK
 
 ```powershell
+# Windows Desktop (Setup + Portable EXE -> dist/)
 npm ci
 npm run dist:win
 ```
 
-The installer is written to `dist/NOVA-Setup-win-x64.exe`. Pushing a version tag such as `v2.1.4` triggers the Windows build and attaches the installer to a GitHub Release. The installer is not code-signed, so Windows may show a publisher warning.
+```sh
+# Android Phone Agent APK (requires JDK 17 + Android SDK 34 + Gradle)
+cd android
+gradle assembleRelease --no-daemon
+```
+
+The Windows installers are written to `dist/NOVA-Setup-win-x64.exe` and `dist/NOVA-Portable-win-x64.exe`, and the Android companion app builds to `android/app/build/outputs/apk/release/app-release.apk`. Pushing a version tag such as `v2.2.0` triggers `.github/workflows/release.yml` to build and attach both Windows `.exe` and Android `.apk` assets to GitHub Releases. The binaries are not code-signed by default.
 
 ## Security and privacy
 

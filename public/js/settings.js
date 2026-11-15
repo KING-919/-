@@ -204,6 +204,7 @@ function fillSettingsForm() {
   updateSettingsSummary();
   updateModeUI();
   refreshMobileStatus();
+  loadBuiltPackages();
 }
 
 async function openSettings(tab = 'connection') {
@@ -387,6 +388,41 @@ async function refreshMobileStatus() {
   } catch {
     // non-fatal
   }
+}
+
+async function loadBuiltPackages() {
+  const list = $('#mobile-builds-list');
+  if (!list) return;
+  try {
+    const data = await api('GET', '/api/builds');
+    state.builds = Array.isArray(data.builds) ? data.builds : [];
+    renderBuiltPackages();
+  } catch {
+    list.innerHTML = `<span class="builds-empty">${escapeHtml(t('buildsNone'))}</span>`;
+  }
+}
+
+function renderBuiltPackages() {
+  const list = $('#mobile-builds-list');
+  if (!list) return;
+  const builds = Array.isArray(state.builds) ? state.builds : [];
+  if (!builds.length) {
+    list.innerHTML = `<span class="builds-empty">${escapeHtml(t('buildsNone'))}</span>`;
+    return;
+  }
+  list.innerHTML = builds.map((b) => {
+    const label = b.platform === 'android'
+      ? t('buildAndroidLabel')
+      : (b.name.toLowerCase().includes('setup') ? t('buildWinSetupLabel') : t('buildWinPortableLabel'));
+    return `<a class="build-item" href="${escapeHtml(b.url)}" download="${escapeHtml(b.name)}">
+      <span class="build-ico">${b.platform === 'android' ? ICONS.phone : ICONS.terminal}</span>
+      <span class="build-meta">
+        <b>${escapeHtml(label)}</b>
+        <small dir="ltr">${escapeHtml(b.name)} · ${formatBytes(b.size)}</small>
+      </span>
+      <span class="build-dl">${escapeHtml(t('downloadBtn'))}</span>
+    </a>`;
+  }).join('');
 }
 
 async function testMobileConnection() {

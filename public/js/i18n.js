@@ -101,6 +101,13 @@ const I18N = {
     autoPhoneDesc: 'غير موصى به · ينفّذ الضغط والكتابة وفتح التطبيقات فورًا',
     mobileSetupNote: 'لتحكم كامل مثل اللابتوب: ثبّت تطبيق NOVA Android APK على الجوال وفعّل خدمة إمكانية الوصول (Accessibility)، أو وصّل الجوال باللابتوب عبر USB Debugging.',
     mobileConnectedOk: 'الجوال متصل ({transport}): {device}',
+    buildsTitle: 'التطبيقات الجاهزة للتنزيل',
+    buildsLoading: 'جارٍ فحص الحزم المبنية…',
+    buildsNone: 'لم يُبنَ ملف APK/EXE بعد على هذا الخادم (راجع مسار البناء).',
+    buildAndroidLabel: 'تطبيق الجوال (Android APK)',
+    buildWinPortableLabel: 'برنامج الكمبيوتر المحمول (Windows EXE)',
+    buildWinSetupLabel: 'مثبّت الويندوز (Windows Setup EXE)',
+    downloadBtn: 'تنزيل',
     checkingConn: 'جارٍ التحقق من الاتصال…',
     checkingConnMeta: 'أضف عنوان API أو شغّل نموذجًا محليًا للبدء',
     providerType: 'نوع الاتصال',
@@ -458,6 +465,13 @@ const I18N = {
     autoPhoneDesc: 'Not recommended · taps, typing & app launches run immediately',
     mobileSetupNote: 'For full laptop-like control: install NOVA Android APK on your phone and enable Accessibility, or connect your phone via USB Debugging (ADB).',
     mobileConnectedOk: 'Phone connected ({transport}): {device}',
+    buildsTitle: 'Built Apps Ready to Download',
+    buildsLoading: 'Checking compiled packages…',
+    buildsNone: 'No APK/EXE packages built on this host yet.',
+    buildAndroidLabel: 'Mobile Agent App (Android APK)',
+    buildWinPortableLabel: 'Desktop Portable App (Windows EXE)',
+    buildWinSetupLabel: 'Windows Installer (Setup EXE)',
+    downloadBtn: 'Download',
     checkingConn: 'Checking connection…',
     checkingConnMeta: 'Add an API URL or start a local model to begin',
     providerType: 'Provider',
@@ -787,6 +801,7 @@ function applyLanguage(lang, { notify = false } = {}) {
   if (typeof updateProviderHint === 'function') updateProviderHint();
   if (typeof updateSettingsSummary === 'function') updateSettingsSummary();
   if (typeof updateMobileSummaryUI === 'function') updateMobileSummaryUI(null);
+  if (typeof renderBuiltPackages === 'function') renderBuiltPackages();
 
   const statusEl = document.getElementById('agent-status');
   if (statusEl && typeof state !== 'undefined' && !state.streaming) {

@@ -173,6 +173,44 @@ app.post('/api/mobile/test', async (req, res) => {
   res.json(status);
 });
 
+const DIST_DIR = path.join(__dirname, 'dist');
+
+function listBuiltPackages() {
+  if (!fs.existsSync(DIST_DIR)) return [];
+  return fs.readdirSync(DIST_DIR, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && /\.(apk|exe)$/i.test(entry.name) && !entry.name.includes('__uninstaller'))
+    .map((entry) => {
+      const stat = fs.statSync(path.join(DIST_DIR, entry.name));
+      const ext = path.extname(entry.name).toLowerCase();
+      return {
+        name: entry.name,
+        platform: ext === '.apk' ? 'android' : 'windows',
+        type: ext.slice(1).toUpperCase(),
+        size: stat.size,
+        updatedAt: stat.mtime.toISOString(),
+        url: `/downloads/${encodeURIComponent(entry.name)}`
+      };
+    })
+    .filter((item) => item.size > 1024 * 1024)
+    .sort((a, b) => a.platform.localeCompare(b.platform) || a.name.localeCompare(b.name));
+}
+
+app.get('/api/builds', (req, res) => {
+  res.json({ ok: true, builds: listBuiltPackages() });
+});
+
+app.get('/downloads/:name', (req, res) => {
+  const safeName = path.basename(String(req.params.name || ''));
+  if (!safeName || !/\.(apk|exe)$/i.test(safeName)) {
+    return res.status(404).json({ error: 'Package not found.' });
+  }
+  const target = path.join(DIST_DIR, safeName);
+  if (!fs.existsSync(target) || !fs.statSync(target).isFile()) {
+    return res.status(404).json({ error: 'Package not found.' });
+  }
+  res.download(target, safeName);
+});
+
 // Read-only workspace browser used by the companion file panel.
 function workspaceTarget(relativePath = '') {
   const root = path.resolve(configStore.get().workspace || process.cwd());
